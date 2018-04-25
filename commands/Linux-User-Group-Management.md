@@ -7,7 +7,7 @@ id dungnm
 uid=1002(dungnm) gid=1004(dungnm) groups=1004(dungnm),1000(dev)
 
 dungnm has primary group is dungnm (1004)
-and also belong to group dev (1000)
+and also belong to supplementary group dev (1000)
 ```
 
 # Find all groups that a user belong to
@@ -155,7 +155,8 @@ dungnm : dungnm dev
 # remove user
 ```
 userdel -r test
-```
+
 The parameter -r will remove:
 
 home folder (/home/test ) and spool mail (/var/spool/mail/test) of user test
+```
