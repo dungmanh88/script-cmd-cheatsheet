@@ -146,7 +146,7 @@ Removing user dungnm from group finance
 ```
 groupdel finance
 
-The association between group finanace and user dungnm will be lost
+The association between group finance and user dungnm will be lost
 
 groups dungnm
 dungnm : dungnm dev
