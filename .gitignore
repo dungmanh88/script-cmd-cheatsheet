@@ -1,16 +1,11 @@
-.idea
-.vagrant
 .git
 .gitignore
 .gitattributes
-vendor
-node_modules
 coverage
 build
 .env
 *.swp
 *.pyc
-.gradle
 *.iml
 *.ipr
 *.iws
@@ -20,7 +15,18 @@ local.properties
 .metadata
 .project
 .settings
-.grunt
+node_modules
+public/hot
+public/storage
+storage/*.key
+vendor
+.idea
+.vagrant
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+nbproject
 
 # Compiled source #
 ###################
