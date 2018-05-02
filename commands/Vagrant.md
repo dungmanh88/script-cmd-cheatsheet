@@ -55,6 +55,11 @@ vagrant share --ssh
 vagrant connect --ssh NAME
 ```
 
+# Show ssh config
+```
+vagrant ssh-config
+```
+
 # Packaging to a box
 ```
 vagrant package --base <UUID-of-vm> --output NAME
@@ -63,4 +68,20 @@ vagrant package --base <UUID-of-vm> --output NAME
 # View port
 ```
 vagrant port my-machine
+vagrant port
+```
+
+# Validate Vagrantfile
+```
+vagrant validate
+```
+
+# Init new Vagrantfile
+```
+vagrant init
+```
+
+# List plugin
+```
+vagrant plugin list
 ```
