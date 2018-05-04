@@ -7,4 +7,5 @@ output=`echo $filename | cut -d "." -f 1`
 output="$output.$ext"
 echo $filename
 echo $output
-$program -i $filename -vcodec copy -acodec copy $output
+#$program -i $filename -vcodec copy -acodec copy $output
+$program -i $filename $output
