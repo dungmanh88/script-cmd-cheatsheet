@@ -25,6 +25,11 @@ or
 vagrant provision
 ```
 
+# list box
+```
+vagrant box list
+```
+
 # Update box
 ```
 vagrant box update
@@ -84,4 +89,15 @@ vagrant init
 # List plugin
 ```
 vagrant plugin list
+```
+
+# Install/Uninstall plugin
+```
+vagrant plugin install <plugin-name>
+vagrant plugin uninstall <plugin-name>
+```
+
+# Clear global status
+```
+vagrant global-status --prune
 ```
