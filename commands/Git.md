@@ -21,6 +21,11 @@ git commit -m "message"
 git push origin master
 ```
 
+# Git diff
+```
+git diff <directory>
+```
+
 git stash: store diff in local to stack -> make clean local repo
 
 git pull
