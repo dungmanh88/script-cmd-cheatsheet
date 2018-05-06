@@ -13,6 +13,14 @@ git config user.email
 or view .git/config
 ```
 
+# Remove file/directory
+```
+git rm -r <directory>
+git rm <file>
+git commit -m "message"
+git push origin master
+```
+
 git stash: store diff in local to stack -> make clean local repo
 
 git pull
