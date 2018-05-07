@@ -13,37 +13,6 @@ git config user.email
 or view .git/config
 ```
 
-# Remove file/directory
-```
-git rm -r <directory>
-git rm <file>
-git commit -m "message"
-git push origin master
-
-git rm same as rm in linux. It also removes file/folder on file system.
-```
-
-# Get difference version between working tree and local repository tree
-```
-git diff <directory>
-git diff cannot see new files. It only sees the diff on a edited files.
-
-diff --git a/1 b/1
-index e69de29..d1cb2dc 100644
---- a/1 ### old version
-+++ b/1 ### new version
-@@ -0,0 +1,3 @@ ### add to line 1 and line 3
-+123
-+
-+321
-```
-
-# Get difference between working tree and staging index tree
-```
-git diff --staged
-git diff --staged can see new files.
-```
-
 git stash: store diff in local to stack -> make clean local repo
 
 git pull
@@ -64,17 +33,6 @@ You can read or edit the file for your purpose.
 ```
 rm -rf .git if it is exists
 git init to create new .git
-```
-
-# Get history
-```
-git log
-git log -n <limit commit object>
-git log | head -n <limit output lines from top-down>
-git log | tail -n <limit output lines from bottom-up>
-git log --author="email|name"
-git log --since=yyyy1-mm1-dd1 --until=yyyy2-mm2-dd2 (find log in a range >= yyyy1-mm1-dd1 and <= yyyy2-mm2-dd2 )
-git log --grep "text in message commit"
 ```
 
 # .gitignore
@@ -116,10 +74,36 @@ git log HEAD
 commit d977709edd76b5de814954597240f21053514929 (HEAD -> master, origin/master)
 ```
 
-# Adding to staging index and unstage file
+# Adding to staging index
 ```
-git add <file>
-git reset HEAD <file>
+git add <file/folder>
+git add .
+git add also apply changes to staging index tree.
+```
+
+# Remove file/directory
+```
+git rm -r <directory>
+git rm <file>
+
+git rm same as rm in linux. It also removes file/folder on file system.
+git rm also apply changes to staging index tree.
+```
+
+# Rename/move file/directory
+```
+git mv <file/directory>
+git mv also apply changes to staging index tree.
+```
+
+# Unstage
+```
+git reset HEAD <file/folder>
+```
+
+# Revert changes in file/folder in working tree, before add to staging index
+```
+git checkout <file/folder>
 ```
 
 # Get status of file/folder in staging index
@@ -140,4 +124,46 @@ Changes not staged for commit: ### NOT STAGED
 
 	modified:   1
 
+```
+
+# Get difference version between working tree and local repository tree
+```
+git diff <directory>
+git diff cannot see new files. It only sees the diff on a edited files.
+
+diff --git a/1 b/1
+index e69de29..d1cb2dc 100644
+--- a/1 ### old version
++++ b/1 ### new version
+@@ -0,0 +1,3 @@ ### add to line 1 and line 3
++123
++
++321
+```
+
+# Get difference between working tree and staging index tree
+```
+git diff --staged
+git diff --staged can see new files.
+```
+
+# Get history
+```
+git log
+git log -n <limit commit object>
+git log | head -n <limit output lines from top-down>
+git log | tail -n <limit output lines from bottom-up>
+git log --author="email|name"
+git log --since=yyyy1-mm1-dd1 --until=yyyy2-mm2-dd2 (find log in a range >= yyyy1-mm1-dd1 and <= yyyy2-mm2-dd2 )
+git log --grep "text in message commit"
+```
+
+# Commit to local repository tree
+```
+git commit -m "messge"
+```
+
+# Push to remote repository tree
+```
+git push origin master
 ```
