@@ -15,3 +15,28 @@ Change in composer.json
 ```
 php artisan --version
 ```
+
+# Clear cache
+```
+php artisan config:cache
+```
+
+# Install composer
+```
+composer install
+```
+
+# Update composer
+```
+composer update
+```
+
+# Migrate table
+```
+php artisan migrate
+```
+
+# Seeding table
+```
+php artisan migrate --seed
+```
