@@ -11,3 +11,6 @@ gitlab-ci-multi-runner unregister -n name|description
 ```
 gitlab-ci-multi-runner list
 ```
+
+# Enable shared runner to a project
+Settings > CI/CD Pipeline > Enable shared runner
