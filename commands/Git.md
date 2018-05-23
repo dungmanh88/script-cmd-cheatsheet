@@ -167,3 +167,10 @@ git commit -m "messge"
 ```
 git push origin master
 ```
+
+# Manage origin
+```
+git remote show origin
+git remote set-url origin git@github.com:dungnm-nal/github-pipeline-example.git
+git remote -v
+```
