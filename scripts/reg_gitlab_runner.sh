@@ -2,10 +2,13 @@
 
 # shared runner
 
+# https://gitlab.nal.vn
 GITLAB_URL=${1}
+# https://gitlab.nal.vn/admin/runners
 REGISTRATION_TOKEN=$2
 RUNNER_NAME=${3:-"my-runner"}
 TAG_LIST=$4
+# shell|docker
 executor=${5:-shell}
 
 if [ $# -eq 0 ]; then

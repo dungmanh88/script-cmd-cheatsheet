@@ -14,3 +14,12 @@ gitlab-ci-multi-runner list
 
 # Enable shared runner to a project
 Settings > CI/CD Pipeline > Enable shared runner
+
+# Building and cache space in shell runner
+/home/gitlab-runner/builds (store code from project)
+/home/gitlab-runner/cache (store cache)
+
+# Building and cache space in docker runner (docker outside of docker)
+/builds/<group>/<project-name>
+/builds/<group>/<project-name>.tmp
+/cache -> /var/lib/docker/volumes/<volid>/_data
