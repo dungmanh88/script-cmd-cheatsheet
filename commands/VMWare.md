@@ -13,3 +13,10 @@ vim-cmd vmsvc/getallvms | grep vm-name
 vim-cmd vmsvc/power.getstate vm-id
 get vm-id using vim-cmd vmsvc/getallvms | grep vm-name
 ```
+
+# Check vmware toolbox
+```
+/etc/init.d/vmware-tools status
+or
+vmware-toolbox-cmd --version
+```
