@@ -1,3 +1,7 @@
+Gem is library in ruby
+Gemfile is like composer.json
+Rails is just a gem
+
 # Path where gem-bame is installed
 ```
 gem which <gem-name>

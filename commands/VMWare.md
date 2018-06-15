@@ -20,3 +20,14 @@ get vm-id using vim-cmd vmsvc/getallvms | grep vm-name
 or
 vmware-toolbox-cmd --version
 ```
+
+# Check vmare network
+```
+esxcli network ip interface list
+```
+```
+esxcli network ip interface ipv4 get
+```
+```
+esxcli network ip dns server list
+```

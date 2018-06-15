@@ -9,3 +9,10 @@ ln -s /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
 ZONE="Asia/Ho_Chi_Minh"
 ```
 systemctl restart ntpd
+
+# Centos 7
+```
+ls -l /etc/localtime
+timedatectl list-timezones | grep Asia/Ho
+timedatectl set-timezone Asia/Ho_Chi_Minh
+```
