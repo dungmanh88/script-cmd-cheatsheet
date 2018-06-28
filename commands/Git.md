@@ -174,3 +174,9 @@ git remote show origin
 git remote set-url origin git@github.com:dungnm-nal/github-pipeline-example.git
 git remote -v
 ```
+
+# Checkout branch
+```
+git branch -v
+git checkout <branch-name>
+```

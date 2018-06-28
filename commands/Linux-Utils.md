@@ -12,3 +12,8 @@ cp -r /source/folder/. /dest/folder
 ```
 cp -Tr /source/folder /source/folder.bak
 ```
+
+# Set hostname
+```
+hostnamectl set-hostname web-performance
+```
