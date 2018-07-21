@@ -151,3 +151,35 @@ exit 0
 ```
 
 read -s will hide input.
+
+# Ping count
+```
+#!/bin/bash
+read -p "Enter server you want to watch: " server_name
+read -p "How many count you want to watch: " count
+ping -c $count $server_name 2>&1 > /dev/null || echo "Server Dead"
+```
+`2>&1 > /dev/null` is a technique that you want to hide output as well as error of ping command.
+The drawback of shell script above: ping return successfully if one of ping is successful. Ping return failed if all ping are failed.
+
+
+# SSH
+```
+#!/bin/bash
+read -p "Enter your username: " username
+read -p "Enter your server name: " server_name
+ssh ${username}@$server_name
+```
+${username} for separating @ char from username
+
+# Mysql
+```
+#!/bin/bash
+read -p "Enter your username: " username
+read -sp "Enter your passwd: " passwd
+echo
+read -p "Enter your db: " db
+read -p "Enter your command: " cmd
+
+mysql -u$username -p$passwd $db -e "$cmd"
+```
