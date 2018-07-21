@@ -1,3 +1,4 @@
+https://stackoverflow.com/questions/4210042/how-to-exclude-a-directory-in-find-command
 Print all directory in  current directory exclude ./bin
 ```
 find . -path ./bin -prune -o -type d -print
