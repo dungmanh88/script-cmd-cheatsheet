@@ -183,3 +183,151 @@ read -p "Enter your command: " cmd
 
 mysql -u$username -p$passwd $db -e "$cmd"
 ```
+
+# Change shebang line
+test.sh
+```
+#!/bin/bash
+echo "hello"
+```
+chmod u+x test.sh && ./test.sh -> use program in shebang line to run the script
+
+equivalent to bash test.sh
+-> change shebang line
+```
+#!/usr/bin/rm
+echo "hello"
+```
+run shell script -> remove shell script
+
+
+# conditional
+```
+[ expression ]
+equivalent to
+test expression
+
+[ ! expression ]
+equivalent to
+test ! expression
+
+[ expression1 -o expression2 ]
+equivalent to
+test expression1 -o expression2
+
+[ expression1 -a expression2 ]
+equivalent to
+test expression1 -a expression2
+```
+
+Test strings
+```
+[ $USER = "root" ]
+[ ! $USER = "root" ]
+```
+
+Test empty
+```
+[ -z $SSH_TTY ] || echo "You are not in ssh session"
+[ -n $SSH_TTY ] && echo "You are in ssh session"
+```
+
+Test integer
+Check total param > 0
+```
+[ $# -gt 0 ] && echo "You entered param"
+```
+
+Test file type
+```
+[ -d $file ] && echo "This is a dir"
+[ -h $file ] && echo "This is a soft link"
+[ -e $file ] && echo "This file exists" # check exists, otherwise, check file type
+[ -c $file ] && echo "This is a character device"
+[ -b $file ] && echo "This is a block device"
+[ -p $file ] && echo "This is a pipe"
+[ -d $file ] && echo "This is a dir"
+[ -f $file ] && echo "This is a file"
+[ -r $file ] && echo "This is a readable file"
+[ -x $file ] && echo "This is a executable file"
+```
+
+```
+if [ expression ] ; then
+  to do something
+fi
+
+if [ expression ] ; then
+  to do something
+elif [ expression ] ; then
+  to do something
+else
+  to do something
+fi
+```
+
+# test param empty
+```
+#!/bin/bash
+echo "You are using shell $(basename $0)"
+test -z $1 || echo "hello $1"
+```
+if $1 empty -> true -> not run command list echo
+if $1 not empty -> false -> run command list echo
+
+# backup2.sh
+```
+#!/bin/bash
+read -p "Which level you want to compress (H, L, M) ? " level
+read -p "Which folder you want to backup to ? " dir
+
+if [ -z $level ] ; then
+  echo "You must enter a level"
+  exit 1
+fi
+
+if [ -z $dir ] ; then
+  echo "You must enter a destination dir"
+  exit 1
+fi
+
+[ -d $HOME/$dir ] || mkdir -m 700 $HOME/$dir
+backup_dir=$HOME/$dir
+
+if [ $level = "L" ] ; then
+  tar_opt="-cvf $backup_dir/b.tar --exclude $backup_dir $HOME"
+elif [ $level = "M" ] ; then
+  tar_opt="-cvzf $backup_dir/b.tar.gz --exclude $backup_dir $HOME"
+else
+  tar_opt="-cvjf $backup_dir/b.tar.bz2 --exclude $backup_dir $HOME"
+fi
+tar $tar_opt
+```
+tar.bz2 > tar.gz
+-> This script will backup and compress all file and dir in current dir to a backup dir in current dir exclude backup dir from backup progress.
+
+# grade.sh
+```
+#!/bin/bash
+
+if [ ! $# -eq 2 ] ; then
+  echo "You must enter student_name and grade"
+  exit 2
+fi
+
+case $2 in
+  [A-C]|[a-c])
+    echo "$1 is super star"
+  ;;
+  [dD])
+    echo "$1 is good"
+  ;;
+  [E-F]|[e-f])
+    echo "$1 is not better"
+  ;;
+  *)
+    echo "Not enough to evaluate"
+  ;;
+esac
+```
+case in easc is good for evaluate a range of letter.
