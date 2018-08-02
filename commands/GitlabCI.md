@@ -5,6 +5,13 @@
 # Unregister runner
 ```
 gitlab-ci-multi-runner unregister -n name|description
+gitlab-runner unregister -n name|description
+```
+
+# Verify
+If you remove runner on gitlab dashboard. You need to update from runner view.
+```
+gitlab-runner verify --delete
 ```
 
 # List runner
