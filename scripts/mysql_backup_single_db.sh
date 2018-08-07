@@ -7,10 +7,11 @@ if [ $# -eq 0 ]; then
 fi
 
 dbname=${1}
-host=${2:-localhost}
-is_replication=${3:-0}
+username=${2:-root}
+host=${3:-localhost}
+is_replication=${4:-0}
 params="--single-transaction --routines --triggers --events --add-drop-database --add-drop-table --extended-insert --quick"
 [ ${is_replication} -eq 1 ] && params="${params} --master-data=2"
-name=`echo $dbname | tr " " "_"`
+name=`echo $dbname | tr " " "_"` ### pass "dbname tblname" -> backup table in a db -> dbname_tblname.dump
 echo "" > /tmp/${name}.dump.log
-mysqldump -u root -p -h ${host} ${params} ${dbname} --log-error=/tmp/${name}.dump.log > ${name}.dump
+mysqldump -u ${username} -p -h ${host} ${params} ${dbname} --log-error=/tmp/${name}.dump.log > ${name}.dump
