@@ -69,18 +69,163 @@ def init_site_list(website=[]):
 
     return website
 
+# define function cap nhat gia tri cua site
+# truyen vao sitename (name, previous_state, current_state, timer), path
+# check path ton tai va la dir, check sitename khong empty
+# can encode phan :// de mo duoc
+# mo file theo sitename
+# ghi de lai file
+def update_site_list_on_disk(site_name, path):
+    if site_name and os.path.exists(path) and os.path.isdir(path):
+        filename = site_name["name"].replace("://", "3A3A2F")
+        f = open(path + "/" + filename, "w")
+        f.write("previous_state: %s\n" % site_name["previous_state"])
+        f.write("current_state: %s\n" % site_name["current_state"])
+        f.write("timer: %s\n" % site_name["timer"])
+        f.close()
+    return None
+
 def flush_site_list_to_disk(website, path):
     if website and os.path.exists(path) and os.path.isdir(path):
         # loop qua site list
         # tao file name theo site name
         # encode file name
+        # luu previous_state, current_state, timer
         for item in website:
-            print(path + "/" + item["name"])
-            filename = item["name"].replace("://", "3A2F2F")
-            f = open(path + "/" + filename, "w")
-            f.write("the day is the last day\n")
-            f.close()
+            update_site_list_on_disk(item, path)
     return None
 
-website = init_site_list([])
-flush_site_list_to_disk(website, "/tmp/xxx")
+# get value 123 of str kieu abc: 123
+def get_value(str):
+    return str[str.find(":")+2:]
+
+# param: website, path
+# kiem tra website not None va path ton tai va la dir thi doc het tat ca cac file trong path
+# check item neu la file thi convert 3A3A2F -> :// roi dua append website item
+# mo file, duyet tung line trong file, nho strip line, lay ra previous_state, current_state, timer cua file
+# append website list cac thong so doc duoc tu file
+# close file
+# return list website truyen vao
+
+def load_from_disk_to_site(website, path):
+    if website is not None and os.path.exists(path) and os.path.isdir(path):
+        file_list = os.listdir(path)
+        for fname in file_list:
+            if os.path.isfile(path + "/" + fname):
+                print("================")
+                print(fname)
+                filename = fname.replace("3A3A2F", "://")
+                file = open(path + "/" + fname, "r")
+                previous_state, current_state, timer = None, None, None
+                for line in file:
+                    line = line.strip()
+                    print("line: " + line)
+                    if "previous_state" in line:
+                        previous_state = get_value(line)
+                    if "current_state" in line:
+                        current_state = get_value(line)
+                    if "timer" in line:
+                        timer = None if get_value(line) == 'None' else get_value(line)
+                website.append({"name": filename,
+                                "previous_state": previous_state,
+                                "current_state": current_state,
+                                "timer": timer
+                                })
+                file.close()
+    return website
+
+path = "/tmp/xxx"
+# kiem tra xem path co ton tai va la dir khong
+# neu chua co thi tao ra luon
+if not os.path.exists(path):
+    os.makedirs(path)
+# kiem tra xem co file trong path khong
+# - neu rong thi khoi tao danh sach trong mem -> flush xuong disk
+website = []
+if not os.listdir(path):
+    print("1")
+    website = init_site_list([])
+    flush_site_list_to_disk(website, path)
+# - khong rong thi load tu disk vao mem
+else:
+    print("2")
+    website = load_from_disk_to_site([], path)
+print("*************")
+print(website)
+
+# khoi tao timer de flush disk
+flush_start_time = int(round(time.time() * 1000))
+flush_timeout = 3 # 3 seconds
+# dinh ky doc tu mem qua moi loop,
+
+while True:
+    print("scan service")
+#   neu list trong mem rong thi load tu disk
+    if website is None or not website:
+        website = load_from_disk_to_site([], path)
+#   neu list khong rong thi kiem tra timer flush xuong disk, reset timer
+    else:
+        flush_end_time = int(round(time.time() * 1000))
+        if flush_end_time - flush_start_time > flush_timeout * 1000:
+            print("flusing after %d" % flush_timeout)
+            flush_site_list_to_disk(website, path)
+            flush_start_time = int(round(time.time() * 1000))
+
+    # phan con lai giong nhu cu
+        for item in website:
+            site_name = item["name"]
+            print("site: %s" % site_name)
+            status_code=None
+        #   - check http response qua tung site, gan previous la current, site nao >500 hoac co loi ket noi (status code None)
+        #     danh dau current site down, note  2 trang thai previous + current vao danh sach
+            try:
+                response = urllib.request.urlopen(site_name)
+            except urllib.error.URLError as e:
+                print("exception url")
+                status_code = e.code
+            except urllib.error.HTTPError as e:
+                print("exception http")
+                status_code = e.code
+            except Exception as e:
+                print("general exception")
+            else:
+                status_code = response.code
+            print(status_code)
+            item["previous_state"] = item["current_state"]
+            if status_code is None or status_code >= 500:
+        #   - current site down
+        #   - previous up va current site down thi ghi thoi diem hien tai, tinh bang ms (so moc 1970) -> day la thoi diem ma bat dau down
+                item["current_state"] = "down"
+                if item["previous_state"] == "up" and item["current_state"] == "down":
+                    item["timer"] = int(round(time.time() * 1000))
+        #   - current site up
+        #   - reset timer
+            else:
+                item["current_state"] = "up"
+                item["timer"] = None
+        # - loop qua danh sach site lan nua
+        print("mail notify")
+        for item in website:
+    #   - site current la down, previous la up thi gui mail thong bao down
+    #   - site current la up, previous la down thi gui thong bao up
+    #   -> current state != previous state
+    #   - site previous down, current down thi lay thoi diem hien tai tinh nang ms (so moc 1970)
+    #   - tinh khoang thoi gian tu timer, qua >= 3 phut thi gui mail tiep con khong thi ignore (de tranh tran mail)
+
+            if item["current_state"] != item["previous_state"]:
+                print("send mail %s" % item["current_state"])
+                send_mail(item["name"], item["current_state"])
+                update_site_list_on_disk(item, path)
+            if item["current_state"] == "down" and item["previous_state"] == "down":
+                print("send mail down after 3 mins")
+                current_time = int(round(time.time() * 1000))
+                print("current_time %d" % current_time)
+                print("timer %d" % int(item["timer"]))
+                if item["timer"] != None and current_time - int(item["timer"]) >= 3 * 1000 * 60:
+                    print("send mail NOW")
+                    send_mail(item["name"], item["current_state"])
+                    # update timer
+                    item["timer"] = int(round(time.time() * 1000))
+                    update_site_list_on_disk(item, path)
+# sleep 1s giua cac lan loop
+    time.sleep(1)

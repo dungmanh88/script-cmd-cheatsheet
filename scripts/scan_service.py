@@ -114,7 +114,7 @@ while True:
 #   - site previous down, current down thi lay thoi diem hien tai tinh nang ms (so moc 1970)
 #   - tinh khoang thoi gian tu timer, qua >= 3 phut thi gui mail tiep con khong thi ignore (de tranh tran mail)
 
-        if item["current_state"] != item["previous_state"] == "up":
+        if item["current_state"] != item["previous_state"]:
             print("send mail %s" % item["current_state"])
             send_mail(item["name"], item["current_state"])
         if item["current_state"] == "down" and item["previous_state"] == "down":
