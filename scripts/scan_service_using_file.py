@@ -77,7 +77,7 @@ def init_site_list(website=[]):
 # ghi de lai file
 def update_site_list_on_disk(site_name, path):
     if site_name and os.path.exists(path) and os.path.isdir(path):
-        filename = site_name["name"].replace("://", "3A3A2F")
+        filename = site_name["name"].replace("://", "3A2F2F")
         f = open(path + "/" + filename, "w")
         f.write("previous_state: %s\n" % site_name["previous_state"])
         f.write("current_state: %s\n" % site_name["current_state"])
@@ -101,7 +101,7 @@ def get_value(str):
 
 # param: website, path
 # kiem tra website not None va path ton tai va la dir thi doc het tat ca cac file trong path
-# check item neu la file thi convert 3A3A2F -> :// roi dua append website item
+# check item neu la file thi convert 3A2F2F -> :// roi dua append website item
 # mo file, duyet tung line trong file, nho strip line, lay ra previous_state, current_state, timer cua file
 # append website list cac thong so doc duoc tu file
 # close file
@@ -114,17 +114,17 @@ def load_from_disk_to_site(website, path):
             if os.path.isfile(path + "/" + fname):
                 print("================")
                 print(fname)
-                filename = fname.replace("3A3A2F", "://")
+                filename = fname.replace("3A2F2F", "://")
                 file = open(path + "/" + fname, "r")
                 previous_state, current_state, timer = None, None, None
                 for line in file:
                     line = line.strip()
                     print("line: " + line)
-                    if "previous_state" in line:
+                    if line.find("previous_state") != -1:
                         previous_state = get_value(line)
-                    if "current_state" in line:
+                    if line.find("current_state") != -1:
                         current_state = get_value(line)
-                    if "timer" in line:
+                    if line.find("timer") != -1
                         timer = None if get_value(line) == 'None' else get_value(line)
                 website.append({"name": filename,
                                 "previous_state": previous_state,
@@ -216,7 +216,7 @@ while True:
                 print("send mail %s" % item["current_state"])
                 send_mail(item["name"], item["current_state"])
                 update_site_list_on_disk(item, path)
-            if item["current_state"] == "down" and item["previous_state"] == "down":
+            if item["current_state"] == "down" == item["previous_state"]:
                 print("send mail down after 3 mins")
                 current_time = int(round(time.time() * 1000))
                 print("current_time %d" % current_time)
@@ -229,3 +229,11 @@ while True:
                     update_site_list_on_disk(item, path)
 # sleep 1s giua cac lan loop
     time.sleep(1)
+
+
+# them systemd de quan ly
+# dung indexof thay cho in line - done
+# viet sao cho main function cang it xu ly cang tot, day vao function khac that nhieu
+# tach thanh cac package, don function vao package rieng
+# viet phien ban giao tiep voi sql qua raw va orm
+# viet trang login, phan quyen, goi api ngoai cua django manage ip

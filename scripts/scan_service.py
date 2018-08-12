@@ -117,7 +117,7 @@ while True:
         if item["current_state"] != item["previous_state"]:
             print("send mail %s" % item["current_state"])
             send_mail(item["name"], item["current_state"])
-        if item["current_state"] == "down" and item["previous_state"] == "down":
+        if item["current_state"] == "down" == item["previous_state"]:
             print("send mail down after 3 mins")
             current_time = int(round(time.time() * 1000))
             print("current_time %d" % current_time)
