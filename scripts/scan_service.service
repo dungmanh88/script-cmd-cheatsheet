@@ -1,0 +1,16 @@
+[Unit]
+Description=scan service
+Requires=network.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/root
+ExecStart=/bin/python3.6 /root/scan_service_using_file.py
+TimeoutSec=30
+RestartSec=3s
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
