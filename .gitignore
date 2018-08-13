@@ -1,4 +1,5 @@
 .git
+manage-ip-env
 .gitignore
 .gitattributes
 coverage
