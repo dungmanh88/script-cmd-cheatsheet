@@ -2,9 +2,9 @@
 
 # shared runner
 
-# https://gitlab.nal.vn
+# https://xxx
 GITLAB_URL=${1}
-# https://gitlab.nal.vn/admin/runners
+# https://xxx/admin/runners
 REGISTRATION_TOKEN=$2
 RUNNER_NAME=${3:-"my-runner"}
 TAG_LIST=$4
