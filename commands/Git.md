@@ -147,6 +147,13 @@ git diff --staged
 git diff --staged can see new files.
 ```
 
+# Get diff between two branches
+```
+git diff branch1..branch2
+or use url
+https://domain-name/namepsace/project-name/compare
+```
+
 # Get history
 ```
 git log
@@ -177,6 +184,20 @@ git remote -v
 
 # Checkout branch
 ```
+git fetch
 git branch -v
 git checkout <branch-name>
+```
+
+# Show remote branch
+```
+git remote show origin
+Notice:   Remote branches
+```
+
+# Get fetch vs git pull
+```
+https://stackoverflow.com/questions/292357/what-is-the-difference-between-git-pull-and-git-fetch
+
+https://i.stack.imgur.com/nWYnQ.png
 ```
