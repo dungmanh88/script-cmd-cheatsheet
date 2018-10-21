@@ -1,9 +1,10 @@
-minikube get-k8s-versions
+minikube get-k8s-versions // remove from 0.29.0
 minikube start --kubernetes-version="v1.10.0"
 minikube ssh
 ~/.minikube
 minikube ip -> get ip of virtualbox vm running k8s
 minikube dashboard
+minikube delete
 
 kubectl get nodes
 kubectl cluster-info
@@ -20,4 +21,4 @@ kubectl describe service --namespace=kube-system
 etcdctl cluster-health
 etcdctl member list
 etcdctl set test
-etcdctl get test 
+etcdctl get test
