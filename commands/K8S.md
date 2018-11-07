@@ -22,3 +22,33 @@ etcdctl cluster-health
 etcdctl member list
 etcdctl set test
 etcdctl get test
+
+kubectl get namespaces
+kubectl get services --namespace kube-system
+kubectl get deployments  --namespace kube-system
+
+https://kubernetes.io/docs/tasks/administer-cluster/dns-debugging-resolution/
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox
+  namespace: kube-system
+spec:
+  containers:
+  - name: busybox
+    image: busybox:1.28
+    command:
+      - sleep
+      - "3600"
+    imagePullPolicy: IfNotPresent
+  restartPolicy: Always
+```
+kubectl create -f busybox.yaml
+
+kubectl exec busybox --namespace=kube-system cat /etc/resolv.conf
+
+kubectl exec busybox --namespace=kube-system -- nslookup kubernetes-dashboard.kube-system.svc.cluster.local
+
+kubectl edit pod pod-name --namespace kube-system
