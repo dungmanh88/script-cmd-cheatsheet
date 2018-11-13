@@ -48,7 +48,10 @@ spec:
 kubectl create -f busybox.yaml
 
 kubectl exec busybox --namespace=kube-system cat /etc/resolv.conf
-
 kubectl exec busybox --namespace=kube-system -- nslookup kubernetes-dashboard.kube-system.svc.cluster.local
+
+kubectl delete pod busybox -n kube-system
+kubectl delete service my-cip-service
+kubectl exec -n kube-system -it ubuntu -- /bin/bash
 
 kubectl edit pod pod-name --namespace kube-system
