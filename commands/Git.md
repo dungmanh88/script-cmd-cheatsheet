@@ -152,6 +152,8 @@ git diff --staged can see new files.
 git diff branch1..branch2
 or use url
 https://domain-name/namepsace/project-name/compare
+
+git diff commit-hash-src commit-hash-dst
 ```
 
 # Get history
@@ -187,6 +189,17 @@ git remote -v
 git fetch
 git branch -v
 git checkout <branch-name>
+```
+
+# Checkout and change branch
+```
+git checkout -b <branch-name>
+```
+
+# Delete branch
+```
+git branch -d <branch-name>
+git push origin :<branch-name>
 ```
 
 # Show remote branch
