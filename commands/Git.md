@@ -214,3 +214,8 @@ https://stackoverflow.com/questions/292357/what-is-the-difference-between-git-pu
 
 https://i.stack.imgur.com/nWYnQ.png
 ```
+
+# Blame on someone
+```
+git blame
+```
