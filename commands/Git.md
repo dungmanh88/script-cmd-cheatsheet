@@ -219,3 +219,15 @@ https://i.stack.imgur.com/nWYnQ.png
 ```
 git blame
 ```
+
+# Change commit message
+https://help.github.com/articles/changing-a-commit-message/
+```
+git commit --amend
+```
+
+# Stash
+```
+git stash -u
+git stash apply
+```
