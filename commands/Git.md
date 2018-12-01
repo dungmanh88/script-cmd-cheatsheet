@@ -188,6 +188,7 @@ git remote -v
 ```
 git fetch
 git branch -v
+git branch -r # get all remote branch
 git checkout <branch-name>
 ```
 
