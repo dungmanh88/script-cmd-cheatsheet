@@ -13,11 +13,11 @@ git config user.email
 or view .git/config
 ```
 
+# Stash
 git stash: store diff in local to stack -> make clean local repo
 
-git pull
-
 git stash pop: flush diff in local stack to local repo after git stash
+or git stash apply
 
 # Where Git files are stored
 ```
@@ -147,6 +147,38 @@ git diff --staged
 git diff --staged can see new files.
 ```
 
+# Get difference between local repo and remote repo
+```
+git diff master..origin/master
+```
+diff --git a/commands/Git.md b/commands/Git.md
+index c95f9e9..7b204f0 100644
+--- a/commands/Git.md
++++ b/commands/Git.md
+@@ -188,7 +188,6 @@ git remote -v
+ ```
+ git fetch
+ git branch -v
+-git branch -r # get all remote branch
+ git checkout <branch-name>
+ ```
+-> - sign. It means origin/master have not got the line "git branch -r # get all remote branch" when it compares with master
+```
+git diff origin/master..master
+```
+diff --git a/commands/Git.md b/commands/Git.md
+index 7b204f0..c95f9e9 100644
+--- a/commands/Git.md
++++ b/commands/Git.md
+@@ -188,6 +188,7 @@ git remote -v
+ ```
+ git fetch
+ git branch -v
++git branch -r # get all remote branch
+ git checkout <branch-name>
+ ```
+-> + sign. It means master have got the line "git branch -r # get all remote branch" when it compares with origin/master
+
 # Get diff between two branches
 ```
 git diff branch1..branch2
@@ -167,9 +199,26 @@ git log --since=yyyy1-mm1-dd1 --until=yyyy2-mm2-dd2 (find log in a range >= yyyy
 git log --grep "text in message commit"
 ```
 
+# Get difference log
+https://stackoverflow.com/questions/7057950/commit-differences-between-local-and-remote
+```
+git log master..origin/master # on origin/master not yet on master
+git log origin/master..master # on master not yet on origin/master
+```
+
+# Show content in commit message
+```
+git show <commit id>
+```
+
 # Commit to local repository tree
 ```
 git commit -m "messge"
+```
+
+# Change commit message
+```
+git commit --amend
 ```
 
 # Push to remote repository tree
@@ -188,6 +237,7 @@ git remote -v
 ```
 git fetch
 git branch -v
+git branch -r # get all remote branch
 git checkout <branch-name>
 ```
 
