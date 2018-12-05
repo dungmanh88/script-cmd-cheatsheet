@@ -45,7 +45,7 @@ spec:
     imagePullPolicy: IfNotPresent
   restartPolicy: Always
 ```
-kubectl create -f busybox.yaml
+kubectl create/apply/delete -f busybox.yaml
 
 kubectl exec busybox --namespace=kube-system cat /etc/resolv.conf
 kubectl exec busybox --namespace=kube-system -- nslookup kubernetes-dashboard.kube-system.svc.cluster.local
@@ -55,3 +55,9 @@ kubectl delete service my-cip-service
 kubectl exec -n kube-system -it ubuntu -- /bin/bash
 
 kubectl edit pod pod-name --namespace kube-system
+
+kubectl logs <pod-name>
+/var/log/pods -> view log in it
+
+kubectl get clusterrole
+kubectl edit clusterrole <clusterrole>
