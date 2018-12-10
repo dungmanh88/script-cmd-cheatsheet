@@ -53,11 +53,26 @@ kubectl exec busybox --namespace=kube-system -- nslookup kubernetes-dashboard.ku
 kubectl delete pod busybox -n kube-system
 kubectl delete service my-cip-service
 kubectl exec -n kube-system -it ubuntu -- /bin/bash
+kubectl exec -n kube-system -it <pod-name> -- sh
 
 kubectl edit pod pod-name --namespace kube-system
 
-kubectl logs <pod-name>
+kubectl logs <pod-name> -n kube-system
+same as
 /var/log/pods -> view log in it
 
 kubectl get clusterrole
 kubectl edit clusterrole <clusterrole>
+
+kubectl get nodes -o yaml
+kubectl get pods -o yaml
+kubectl get services -o yaml -n kube-system
+
+kubectl config view - view kubeconfig of kubectl
+
+kubectl cluster-info
+
+kubectl config current-context
+
+# use current context in kubectl, current context declared in kubeconfig ~/.kube/config
+kubectl config use-context

@@ -3,3 +3,4 @@ https://coreos.com/etcd/docs/latest/dev-guide/interacting_v3.html
 https://www.digitalocean.com/community/tutorials/how-to-use-etcdctl-and-etcd-coreos-s-distributed-key-value-store
 
 ./etcdctl ls / --recursive
+./etcdctl --endpoints http://127.0.0.1:2379 ls /
