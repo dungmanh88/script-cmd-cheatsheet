@@ -80,3 +80,16 @@ kubectl config use-context
 kubectl get ds
 check rolling update feature of ds
 kubectl get ds/kube-proxy -o go-template='{{.spec.updateStrategy.type}}{{"\n"}}' -n kube-system
+
+# check health of scheduler, controller manager, etcd-xxx
+kubectl get cs -n kube-system
+
+kubectl describe pod pod-name -n kube-system
+
+https://stackoverflow.com/questions/45486828/kube-dns-kubedns-dnsmasq-sidecar-fails-to-start
+kubectl logs kube-dns-pod-name -n kube-system -c sidecar
+kubectl logs kube-dns-pod-name -n kube-system -c kubedns
+kubectl logs kube-dns-pod-name -n kube-system -c dnsmasq
+
+kubectl get secrets --all-namespaces
+kubectl delete secret --namespace=kube-system default-xxx
