@@ -76,3 +76,7 @@ kubectl config current-context
 
 # use current context in kubectl, current context declared in kubeconfig ~/.kube/config
 kubectl config use-context
+
+kubectl get ds
+check rolling update feature of ds
+kubectl get ds/kube-proxy -o go-template='{{.spec.updateStrategy.type}}{{"\n"}}' -n kube-system
