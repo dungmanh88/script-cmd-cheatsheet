@@ -248,8 +248,10 @@ git checkout -b <branch-name>
 
 # Delete branch
 ```
+git checkout other-branch
 git branch -d <branch-name>
-git push origin :<branch-name>
+#git push origin :<branch-name>
+git push --delete origin <branch-name>
 ```
 
 # Show remote branch
