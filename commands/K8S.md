@@ -93,3 +93,6 @@ kubectl logs kube-dns-pod-name -n kube-system -c dnsmasq
 
 kubectl get secrets --all-namespaces
 kubectl delete secret --namespace=kube-system default-xxx
+
+kubectl get po -n kube-system
+kubectl get po -n kube-system --sort-by spec.nodeName -o custom-columns=POD:metadata.name,NODE:spec.nodeName
