@@ -96,3 +96,11 @@ kubectl delete secret --namespace=kube-system default-xxx
 
 kubectl get po -n kube-system
 kubectl get po -n kube-system --sort-by spec.nodeName -o custom-columns=POD:metadata.name,NODE:spec.nodeName
+
+kubectl get po -n kube-system --sort-by metadata.name -o custom-columns=POD:metadata.name,NODE:spec.nodeName
+POD
+
+```
+kubectl proxy --address=0.0.0.0 --port=8001 --accept-hosts='^*$'
+```
+kubectl get no -o json

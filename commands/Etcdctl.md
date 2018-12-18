@@ -14,6 +14,7 @@ https://stackoverflow.com/questions/48076272/etcdctl-cant-see-the-key-put-by-go-
 version V3 khong co ls  nua
 export ETCDCTL_API=3
 ./etcdctl get / --prefix --keys-only
+./etcdctl get /registry/pods --prefix --keys-only
 
 ./etcdctl put foo bar
 ./etcdctl get foo
