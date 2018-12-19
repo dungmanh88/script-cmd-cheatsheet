@@ -103,4 +103,6 @@ POD
 ```
 kubectl proxy --address=0.0.0.0 --port=8001 --accept-hosts='^*$'
 ```
-kubectl get no -o json
+kubectl get no -o json|wide|yaml
+
+kubectl port-forward pod-name host-port:container-port &

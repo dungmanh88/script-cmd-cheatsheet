@@ -269,7 +269,7 @@ https://i.stack.imgur.com/nWYnQ.png
 
 # Blame on someone
 ```
-git blame
+git blame file-name
 ```
 
 # Change commit message
@@ -283,3 +283,32 @@ git commit --amend
 git stash -u
 git stash apply
 ```
+
+# Revert a commit
+view head: git log HEAD
+
+view commit id: git log
+
+git reset --soft HEAD~1 -> back to previous commit but keep the changes, the change back to working tree (not yet in index)
+
+git reset --hard HEAD -> cancel the change, go straight a previous commit.
+https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-commits-in-git/34547846
+
+git revert commit-hash -> luu history, tao ra commit khac sau commit gan nhat nhung ghi de noi dung cua commit gan nhat, commit gan nhat khong bi mat
+
+git push -f -> override commit gan nhat vua duoc push len tren git, commit gan nhat se bi thay the -> rat nguy hiem
+
+# View log more convinient
+~/.gitconfig
+```
+[alias]
+   lg = log --graph --pretty=format:'%C(bold blue)%h%C(reset) -%C(auto)%d%Creset %C(white)%s%C(reset) %Cgreen(%cI) %C(dim white)%an%Creset' --abbrev-commit
+```
+git lg
+git log --all --decorate --oneline --graph
+git log <branch-name> --decorate --oneline --graph
+
+# Checkout a revision
+git log to see
+git checkout commit-id
+git checkout - #to get back
