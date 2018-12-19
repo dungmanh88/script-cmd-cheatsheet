@@ -106,3 +106,6 @@ kubectl proxy --address=0.0.0.0 --port=8001 --accept-hosts='^*$'
 kubectl get no -o json|wide|yaml
 
 kubectl port-forward pod-name host-port:container-port &
+
+Mot pod co nhieu container -> exec vao container trong pod nhu the nay nhe
+kubectl exec pod-name -c container-name ls /etc/nginx/conf.d
