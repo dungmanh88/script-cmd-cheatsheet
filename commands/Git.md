@@ -103,7 +103,7 @@ git reset HEAD <file/folder>
 
 # Revert changes in file/folder in working tree, before add to staging index
 ```
-git checkout <file/folder>
+git checkout -- <file/folder>
 ```
 
 # Get status of file/folder in staging index
@@ -126,7 +126,7 @@ Changes not staged for commit: ### NOT STAGED
 
 ```
 
-# Get difference version between working tree and local repository tree
+# Get difference in working tree
 ```
 git diff <directory>
 git diff cannot see new files. It only sees the diff on a edited files.
@@ -141,7 +141,7 @@ index e69de29..d1cb2dc 100644
 +321
 ```
 
-# Get difference between working tree and staging index tree
+# Get difference in staging index tree
 ```
 git diff --staged
 git diff --staged can see new files.
@@ -198,6 +198,9 @@ git log --author="email|name"
 git log --since=yyyy1-mm1-dd1 --until=yyyy2-mm2-dd2 (find log in a range >= yyyy1-mm1-dd1 and <= yyyy2-mm2-dd2 )
 git log --grep "text in message commit"
 ```
+Nhung gi co trong git log thi co nghia la deu da duoc commit (nam trong repo)
+local repo cung co commit id
+remote repo cung co commit id nhu vay
 
 # Get difference log
 https://stackoverflow.com/questions/7057950/commit-differences-between-local-and-remote
@@ -250,6 +253,7 @@ git checkout -b <branch-name>
 ```
 git checkout other-branch
 git branch -d <branch-name>
+git branch -D <branch-name> for unmerged branch
 #git push origin :<branch-name>
 git push --delete origin <branch-name>
 ```
@@ -279,36 +283,90 @@ git commit --amend
 ```
 
 # Stash
+stash change to checkout other branch.
 ```
 git stash -u
 git stash apply
 ```
 
+# view head
+```
+git log HEAD
+```
+
+# Remove unstage file out of working tree
+```
+git checkout -- file
+or for everything
+git checkout -- .
+```
+
+# Unstage file: move from staging index -> working tree
+```
+git reset HEAD file
+or for everything
+git reset HEAD
+```
+
 # Revert a commit
-view head: git log HEAD
+view commit id: use git log
 
-view commit id: git log
+```
+git reset --soft HEAD~1
+```
+1 la offset, co the thay the la 2,3
+-> back to previous commit but keep the changes, the change back to index (tracked)
 
-git reset --soft HEAD~1 -> back to previous commit but keep the changes, the change back to working tree (not yet in index)
-
-git reset --hard HEAD -> cancel the change, go straight a previous commit.
+```
+git reset --hard HEAD~1
+```
+1 la offset, co the thay the la 2,3
+-> cancel the change, go straight a previous commit.
 https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-commits-in-git/34547846
 
-git revert commit-hash -> luu history, tao ra commit khac sau commit gan nhat nhung ghi de noi dung cua commit gan nhat, commit gan nhat khong bi mat
+```
+git revert bad-commit-hash
+```
+-> luu history, tao ra commit khac sau commit gan nhat nhung ghi de noi dung cua commit gan nhat, commit gan nhat khong bi mat
+
+# Revert a commit on repo
+## Not create history
+KHONG  git pull commit do ve, toi se tim cach override de replace commit do.
 
 git push -f -> override commit gan nhat vua duoc push len tren git, commit gan nhat se bi thay the -> rat nguy hiem
 
+## Create history
+git pull ve local
+
+tim cach revert o local dung
+```
+git revert bad-commit-hash
+```
+-> thay doi luon trong local repo
+roi push revert len remote
+
 # View log more convinient
-~/.gitconfig
+~/.gitconfig (global config of git)
 ```
 [alias]
    lg = log --graph --pretty=format:'%C(bold blue)%h%C(reset) -%C(auto)%d%Creset %C(white)%s%C(reset) %Cgreen(%cI) %C(dim white)%an%Creset' --abbrev-commit
 ```
 git lg
+or continue use:
 git log --all --decorate --oneline --graph
 git log <branch-name> --decorate --oneline --graph
 
-# Checkout a revision
-git log to see
+# Backup a branch
+```
+git checkout <branch-name>
+git checkout -b <backup-branch-name>
+```
+
+# Checkout a revision to see
 git checkout commit-id
-git checkout - #to get back
+git checkout - #to get back previous revision, like cd -
+cung co the ap dung cho branch
+
+Khi checkout mot revision -> git se thuc hien HEAD detached at commit-id ma ban muon checkout -> tuc la tao mot revision tam thoi de ban thu nghiem, co the luu cac thu nghiem bang cach git checkout -b <new-branch-name>
+
+**Khi branching trong git: branch moi se co moi log cua branch ma tu do ban re nhanh.**
