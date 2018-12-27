@@ -61,6 +61,18 @@ kubectl logs kube-dns-pod-name -n kube-system -c sidecar
 kubectl logs kube-dns-pod-name -n kube-system -c kubedns
 kubectl logs kube-dns-pod-name -n kube-system -c dnsmasq
 
+# Debug service without exposion
+Forward port of a pod
+```
+kubectl port-forward pod-name host-port:container-port &
+
+curl localhost:host-port
+```
+
+# Almanac (like a manual)
+kubectl explain pods
+kubectl explain pod.spec
+
 # use current context in kubectl, current context declared in kubeconfig ~/.kube/config
 kubectl config use-context
 kubectl config view - view kubeconfig of kubectl
@@ -87,9 +99,6 @@ kubectl exec busybox --namespace=kube-system -- nslookup kubernetes-dashboard.ku
 
 kubectl exec -n kube-system -it ubuntu -- /bin/bash
 kubectl exec -n kube-system -it <pod-name> -- sh
-
-# Forward port of a pod
-kubectl port-forward pod-name host-port:container-port &
 
 # Exec a container in a pod
 Mot pod co nhieu container -> exec vao container trong pod nhu the nay nhe
