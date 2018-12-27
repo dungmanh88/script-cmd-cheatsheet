@@ -58,3 +58,8 @@ docker-compose rm
 docker-compose build --no-cache ### force if file copy is changed
 docker-compose up -d --force-recreate ### force recreate container
 ```
+
+# Checksum image = digest
+```
+docker images --digests
+```
