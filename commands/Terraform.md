@@ -12,3 +12,6 @@ terraform show # show all resources provisioned
 
 terraform apply -auto-approve -state=local
 -> state local:  local.backup va local
+
+terraform refresh: update existing aws on aws to tfstate (remote|local)
+like: remove a resource or modify a resource
