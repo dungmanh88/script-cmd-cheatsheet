@@ -6,6 +6,17 @@ git config --global user.name "xxx"
 git config --global user.email "xxx"
 ```
 
+## Get revision of branch
+```
+git rev-parse HEAD
+git rev-parse HEAD~1
+```
+
+## Archive source code
+```
+git archive --format zip --output /tmp/source.zip HEAD
+```
+
 # Get config git
 ```
 git config user.name
