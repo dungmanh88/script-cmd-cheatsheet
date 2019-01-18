@@ -13,3 +13,6 @@ aws configure list
 aws sns  list-subscriptions
 aws sns  list-topics
 aws sns list-subscriptions-by-topic --topic-arn "<arn>"
+
+# Get account id
+aws sts get-caller-identity --output text --query 'Account'
