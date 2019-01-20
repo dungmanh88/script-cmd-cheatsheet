@@ -77,6 +77,10 @@ kubectl explain pod.spec
 kubectl config use-context
 kubectl config view - view kubeconfig of kubectl
 kubectl config current-context
+export KUBECONFIG=$KUBECONFIG:$HOME/.kube/config
+
+##if you want to use another kube config:
+kubectl config --kubeconfig=/path/to/config view --flatten|--minify
 
 # Check daemonset
 kubectl get ds

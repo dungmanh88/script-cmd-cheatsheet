@@ -28,3 +28,13 @@ requirements and constraints from each module, run "terraform providers".
 
 provider o day la aws - cloud provider, do terraform work with many cloud providers.
 provider installed when run terraform init.
+
+# list all resource
+terraform state list -state=/path/to/state
+
+# force unlock
+if you close app when is in locking state, you must unlock manually.
+```
+terraform force-unlock LockID
+terraform force-unlock xxx
+```

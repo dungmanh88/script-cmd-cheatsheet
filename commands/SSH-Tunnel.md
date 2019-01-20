@@ -15,3 +15,11 @@ ssh -L $host:$port:$remote_host:$remote_port $user@$remote_host -N
 ```
 ssh -L $host:$port:$remote_host:$remote_port $user@$middle_host -N
 ```
+
+https://superuser.com/questions/96489/an-ssh-tunnel-via-multiple-hops
+ssh -F /tmp/config -L 6969:localhost:6969 bridge -N
+
+first 6969 is local port
+second 6969 is remote port
+bridge is ssh config to go to remote host
+-N is a hop
