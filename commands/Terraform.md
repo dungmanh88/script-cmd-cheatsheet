@@ -35,6 +35,6 @@ terraform state list -state=/path/to/state
 # force unlock
 if you close app when is in locking state, you must unlock manually.
 ```
-terraform force-unlock LockID
+terraform force-unlock LockID # not md5sum -> remove item
 terraform force-unlock xxx
 ```
