@@ -146,3 +146,6 @@ kubectl delete secret --namespace=kube-system default-xxx
 
 # Link
 https://kubernetes.io/docs/tasks/administer-cluster/dns-debugging-resolution/
+
+show all container in pods
+kubectl describe pod/xxx -n default
