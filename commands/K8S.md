@@ -27,9 +27,11 @@ kubectl get po -n kube-system --sort-by spec.nodeName -o custom-columns=POD:meta
 
 kubectl get po -n kube-system --sort-by metadata.name -o custom-columns=POD:metadata.name,NODE:spec.nodeName
 POD
-
 kubectl delete pod busybox -n kube-system
 kubectl edit pod pod-name --namespace kube-system
+
+# get share folder of pod
+kubectl get po <pod-name> -o 'jsonpath={.metadata.uid}'
 
 # Manage service
 kubectl get services
